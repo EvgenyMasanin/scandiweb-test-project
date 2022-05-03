@@ -1,16 +1,14 @@
 import { Component, MouseEvent } from 'react'
+import Box from 'components/ui/box'
 import { Flex } from 'components/ui/flex'
 import Text from 'components/ui/text/Text'
+import { Link } from 'components/ui/link/Link.style'
 import ProductAttributeSwitcherGroup from 'components/product-description/product-attribute-switcher/ProductAttributeSwitcherGroup'
 import CartItemActions from './CartItemActions'
 import CartGallery from './CartGallery'
 
-import { Attribute, Currency, InCartProduct, Product, Size, SizeModifierMap } from 'types'
 import { Paths } from 'routes'
-import Box from 'components/ui/box'
-import { theme } from 'global.styles'
-import { Link } from 'components/ui/link/Link.style'
-import Button from 'components/ui/button'
+import { Attribute, Currency, InCartProduct, Product, Size, SizeModifierMap } from 'types'
 
 interface CartItemProps {
   inCartProduct: InCartProduct

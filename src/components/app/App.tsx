@@ -15,14 +15,9 @@ import { selectCurrencies, setCurrencies } from 'redux-store/reducers/currency.s
 
 import { withCategoryNames, WithCategoryNamesData } from 'graphql-api/hocs'
 import Box from 'components/ui/box'
-import ProductListPage from 'pages/product-list-page/ProductListPage'
+import Router from 'routes'
 import { withCurrencies, WithCurrenciesData } from 'graphql-api/hocs/withCurrency'
 import { Currency } from 'types'
-
-import { Redirect, Route, Switch } from 'react-router-dom'
-import { Paths } from 'routes'
-import ProductDescriptionPage from 'pages/product-description-page/ProductDescriptionPage'
-import CartPage from 'pages/cart-page/CartPage'
 
 interface AppProps extends WithCategoryNamesData, WithCurrenciesData {
   categoryNames: string[]
@@ -83,17 +78,7 @@ class App extends Component<AppProps> {
         </Box>
         <Box height="calc(100% - 76px)" overflow="auto" padding="0 20px">
           <Box maxWidth={1240} margin="0 auto" height="100%" padding="80px 0 0">
-            <Switch>
-              <Route exact path="/">
-                <Redirect to={Paths.ProductListPage} />
-              </Route>
-              <Route path={Paths.ProductListPage} component={ProductListPage} />
-              <Route
-                path={`${Paths.ProductDescriptionPage}/:id`}
-                component={ProductDescriptionPage}
-              />
-              <Route path={Paths.CartPage} component={CartPage} />
-            </Switch>
+            <Router />
           </Box>
         </Box>
       </>
