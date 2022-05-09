@@ -1,11 +1,10 @@
-import styled, { css } from 'styled-components'
+import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
 
-export interface StyledNavLinkProps {
-  isActive?: boolean
-}
-
-export const StyledNavLink = styled.a<StyledNavLinkProps>`
+export const StyledNavLink = styled(NavLink)`
   display: inline-block;
+
+  text-decoration: none;
 
   position: static;
   height: 52px;
@@ -13,10 +12,4 @@ export const StyledNavLink = styled.a<StyledNavLinkProps>`
   padding-right: 16px;
 
   cursor: pointer;
-
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      border-bottom: 2px solid ${({ theme }) => theme.colors.primary};
-    `}
 `

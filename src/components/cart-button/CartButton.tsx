@@ -16,7 +16,6 @@ interface CartButtonProps {
 
 interface CartButtonState {
   isOpen: boolean
-  isOverlayRefDefined: boolean
 }
 
 class CartButton extends Component<CartButtonProps, CartButtonState> {
@@ -27,18 +26,17 @@ class CartButton extends Component<CartButtonProps, CartButtonState> {
 
     this.state = {
       isOpen: false,
-      isOverlayRefDefined: false,
     }
 
     this.overlay = createRef<HTMLDivElement>()
   }
 
   componentDidUpdate(): void {
-    if (this.state.isOverlayRefDefined) return
-    if (!this.overlay.current) return
-
-    this.setState({ isOverlayRefDefined: true })
-    ModalService.onOutsideClick(this.overlay.current, this.handleOutsideClick)
+    if (this.state.isOpen) {
+      ModalService.onOutsideClick(this.overlay.current, this.handleOutsideClick)
+    } else {
+      ModalService.removeListener(this.handleOutsideClick)
+    }
   }
 
   componentWillUnmount(): void {

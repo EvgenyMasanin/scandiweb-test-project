@@ -10,8 +10,6 @@ import {
   selectCategoryNames,
   setCategory,
 } from 'redux-store/reducers/categories.slice'
-import { NavLink } from 'react-router-dom'
-import { Paths } from 'routes'
 
 interface HeaderProps {
   categoryNames: string[]
@@ -33,11 +31,7 @@ class Header extends Component<HeaderProps> {
 
     return (
       <UiHeader
-        Logo={
-          <NavLink to={Paths.ProductListPage}>
-            <LogoIcon />
-          </NavLink>
-        }
+        Logo={<LogoIcon />}
         links={links}
         actions={<HeaderActions />}
         onLinkClick={this.handleLinkClick}

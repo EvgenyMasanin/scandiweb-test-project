@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { StyledNavigation } from '../Header.style'
+import { StyledNavigation } from '../Header.style' 
 
 import NavLink from 'components/ui/nav-link'
 

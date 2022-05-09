@@ -26,13 +26,10 @@ interface DropdownProps<T> {
 
 interface DropdownState<T> {
   isOpen: boolean
-  isOverlayRefDefined: boolean
 
   selectedItem: T
   items: T[]
 }
-
-//FIXME: on outside click always listen to click event
 
 class Dropdown<T extends DropDownItem> extends Component<DropdownProps<T>, DropdownState<T>> {
   overlay: RefObject<HTMLDivElement>
@@ -44,8 +41,6 @@ class Dropdown<T extends DropDownItem> extends Component<DropdownProps<T>, Dropd
       isOpen: false,
       selectedItem: props.items[0],
       items: props.items,
-
-      isOverlayRefDefined: false,
     }
 
     this.overlay = createRef<HTMLDivElement>()
@@ -56,26 +51,23 @@ class Dropdown<T extends DropDownItem> extends Component<DropdownProps<T>, Dropd
   }
 
   componentDidUpdate(): void {
-    if (this.state.isOverlayRefDefined) return
-    if (!this.overlay.current) return
-
-    this.setState({ isOverlayRefDefined: true })
-    ModalService.onOutsideClick(this.overlay.current, this.handleOutsideClick)
+    if (this.state.isOpen) {
+      ModalService.onOutsideClick(this.overlay.current, this.handleOutsideClick)
+    } else {
+      ModalService.removeListener(this.handleOutsideClick)
+    }
   }
 
   componentWillUnmount(): void {
     ModalService.removeListener(this.handleOutsideClick)
   }
 
-  handleOutsideClick = () => {
-    this.setState({ isOpen: false })
-  }
+  handleOutsideClick = () => this.setState({ isOpen: false })
 
-  handleClick = () => {
+  handleClick = () =>
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
     }))
-  }
 
   handleSelect = (item: T) => {
     this.props.onSelect?.(item)

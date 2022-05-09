@@ -65,11 +65,13 @@ class App extends Component<AppProps> {
   render() {
     const {
       categoryNamesData: { loading, error },
+      currenciesData: { loading: currenciesDataLoading, error: currenciesDataError },
+      categoryNames,
     } = this.props
 
-    if (loading) return <div>Loading...</div>
+    if (loading || currenciesDataLoading) return <div>Loading...</div>
 
-    if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>
+    if (error || currenciesDataError) return <pre>{JSON.stringify(error, null, 2)}</pre>
 
     return (
       <>
@@ -78,7 +80,7 @@ class App extends Component<AppProps> {
         </Box>
         <Box height="calc(100% - 76px)" overflow="auto" padding="0 20px">
           <Box maxWidth={1240} margin="0 auto" height="100%" padding="80px 0 0">
-            <Router />
+            <Router defaultCategory={categoryNames[0]} />
           </Box>
         </Box>
       </>

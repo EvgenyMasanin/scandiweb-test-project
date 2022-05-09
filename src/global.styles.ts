@@ -12,6 +12,10 @@ export const GlobalStyles = createGlobalStyle`
 html, body, #root {
     height: 100%;
 }
+
+ul {
+  padding-left: 20px
+}
 `
 
 export const theme: DefaultTheme = {

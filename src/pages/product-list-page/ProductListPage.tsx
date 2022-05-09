@@ -26,7 +26,7 @@ import { Paths } from 'routes'
 import { RouteComponentProps } from 'react-router-dom'
 import { selectCategory } from 'redux-store/reducers/categories.slice'
 
-interface ProductListPageProps extends RouteComponentProps {
+interface ProductListPageProps extends RouteComponentProps<{ category: string }> {
   category: string
   currency: Currency
 
@@ -53,6 +53,7 @@ class ProductListPage extends Component<ProductListPageProps> {
 
   render() {
     const { category, currency } = this.props
+
     return (
       <>
         <Category category={category} />

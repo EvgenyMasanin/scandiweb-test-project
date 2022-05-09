@@ -1,4 +1,6 @@
+import { theme } from 'global.styles'
 import { Component } from 'react'
+import { Paths } from 'routes'
 import { ID, Link } from '../header/navigation/Navigation'
 import { StyledNavLink } from './NavLink.style'
 
@@ -21,7 +23,14 @@ class NavLink<T extends ID = string> extends Component<NavLinkProps<T>> {
     } = this.props
 
     return (
-      <StyledNavLink isActive={isActive} onClick={this.handleClick}>
+      <StyledNavLink
+        to={`${Paths.ProductListPage}/${label}`}
+        activeStyle={{
+          borderBottom: `2px solid ${theme.colors.primary}`,
+        }}
+        isActive={() => isActive}
+        onClick={this.handleClick}
+      >
         {label}
       </StyledNavLink>
     )
